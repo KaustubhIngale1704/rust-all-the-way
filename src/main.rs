@@ -1,4 +1,4 @@
-use std::io;
+use std::{collections::HashMap, io};
 
 #[derive(Debug)]
 struct Rectangle {
@@ -28,6 +28,48 @@ enum IpAddrKind {
 }
 
 fn main() {
+    // Common Collections
+
+    let mut lst_integers = vec![1, 2, 6, 3, 5, 24, 17, 17, 34, 24];
+
+    let len = lst_integers.len();
+    let mut i = 0;
+    let mut j = 1;
+
+    while i < len - 1 {
+        j = i + 1;
+        while j < len {
+            if lst_integers[i] > lst_integers[j] {
+                let temp = lst_integers[i];
+                lst_integers[i] = lst_integers[j];
+                lst_integers[j] = temp;
+            }
+            j += 1;
+        }
+        i += 1;
+    }
+
+    println!("The listed new array is {:?}", lst_integers);
+
+    let mut hstc = HashMap::new();
+
+    for item in lst_integers {
+        let count = hstc.entry(item).or_insert(0);
+        *count += 1;
+    }
+
+    let mut val_most_occured = 0;
+    let mut valt = 0;
+    for (key, val) in hstc {
+        if val > val_most_occured {
+            val_most_occured = val;
+            valt = key;
+        }
+    }
+
+    println!("The value most occured is {valt}");
+
+    // guessing game
     let predefined_array = [1, 7, 19, 23, 56, 89, 104, 155];
 
     let mut num = String::new();
@@ -69,6 +111,7 @@ fn main() {
         break;
     }
 
+    // fibonacci program
     println!("Enter which fibonacci number you want to print");
 
     let mut num = String::new();
@@ -115,6 +158,7 @@ fn main() {
 
     println!("The fibonacci number at given index is: {prev}");
 
+    // structs, enums, match
     let rect1 = Rectangle {
         width: 30,
         height: 50,
