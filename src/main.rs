@@ -69,6 +69,50 @@ fn main() {
 
     println!("The value most occured is {valt}");
 
+    // Adding users to departments
+
+    let mut dict_dept_to_users = HashMap::new();
+
+    loop {
+        let mut dept_name = String::new();
+        println!("Please provide the department name to which user should be added:");
+
+        io::stdin()
+            .read_line(&mut dept_name)
+            .expect("Invalid department name");
+
+        let dept = dict_dept_to_users.entry(dept_name).or_insert(vec![]);
+
+        let mut user_name = String::new();
+        println!("Please provide user to add:");
+
+        io::stdin()
+            .read_line(&mut user_name)
+            .expect("Invalid user name");
+
+        dept.push(user_name);
+
+        for (k, v) in &dict_dept_to_users {
+            println!("Department name: {k}");
+            println!("Users: {:#?}", v)
+        }
+
+        let mut add_more = String::new();
+        println!("Would you like to add more? [Y/N]");
+
+        io::stdin()
+            .read_line(&mut add_more)
+            .expect("Invalid keyword");
+
+        let add_more = add_more.trim();
+
+        if add_more == "Y" {
+            continue;
+        } else {
+            break;
+        }
+    }
+
     // guessing game
     let predefined_array = [1, 7, 19, 23, 56, 89, 104, 155];
 
